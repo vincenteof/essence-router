@@ -11,6 +11,7 @@ type EssenceListener = (msg?: { location: EssenceLocation; action: string; }) =>
 type EssenceUnlistener = () => void
 
 interface IHistory {
+  currentLocation: EssenceLocation
   listen(listener: EssenceListener): EssenceListener
   navigate(to: string, parm: { state: any; replace: boolean; }): void
 }
@@ -36,7 +37,7 @@ class EssenceHistory implements IHistory {
       this.location = getLocation(this.source)
       listener({ location: this.location, action: "pop" })
     }
-    this.source.addListener("popstate", popstateListener)
+    this.source.addEventListener("popstate", popstateListener)
     return () => {
       this.source.removeEventListener("popstate", popstateListener)
       this.listeners.filter(fn => fn !== listener)
@@ -69,4 +70,4 @@ function createHistory(source: any): IHistory {
 const globalHistory = createHistory(window)
 const navigate = globalHistory.navigate
 
-export { globalHistory, navigate, createHistory }
+export { globalHistory, navigate, createHistory, IHistory, EssenceLocation }
