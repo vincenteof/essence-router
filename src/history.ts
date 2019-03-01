@@ -44,9 +44,9 @@ class EssenceHistory implements IHistory {
     }
   }
 
-  navigate(to: string, param: { state: any, replace?: boolean }): void {
-    const state = param.state
-    const replace = param.replace ? param.replace : false
+  navigate(to: string, options: { state: any, replace?: boolean }): void {
+    const state = options.state
+    const replace = options.replace ? options.replace : false
     const keyedState = { ...state, key: `${Date.now()}` }
     try {
       if (replace) {
@@ -55,7 +55,7 @@ class EssenceHistory implements IHistory {
         this.source.history.pushState(keyedState, null, to)
       }
     } catch (e) {
-      this.source.location[replace ? "replace" : "assign"](to);
+      this.source.location[replace ? "replace" : "assign"](to)
     }
     this.location = getLocation(this.source)
     const msg = { location: this.location, action: "PUSH" }
@@ -68,6 +68,6 @@ function createHistory(source: any): IHistory {
 }
 
 const globalHistory = createHistory(window)
-const navigate = globalHistory.navigate
+const navigate = globalHistory.navigate.bind(globalHistory)
 
-export { globalHistory, navigate, createHistory, IHistory, EssenceLocation }
+export { globalHistory, navigate, createHistory, EssenceLocation, IHistory }

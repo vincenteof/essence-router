@@ -13,7 +13,7 @@ const LocationContext: React.Context<LocationContextContent> = React.createConte
 
 
 // ------ LocationConsumer
-interface LocationProps { children: (ctx: LocationContextContent) => React.ReactNode }
+interface LocationProps { children: (ctx: LocationContextContent) => React.ReactElement }
 
 const Location = (props: LocationProps) => {
   let LocationComsumer = LocationContext.Consumer
@@ -24,7 +24,8 @@ const Location = (props: LocationProps) => {
           props.children(context)
         ) : (
             <LocationProvider>{props.children}</LocationProvider>
-          )}
+          )
+      }
     </LocationComsumer>
   )
 }
@@ -56,7 +57,10 @@ class LocationProvider extends React.Component<LocationProviderProps, LocationPr
 
   getContext() {
     const { navigate, currentLocation } = this.props.history
-    return { navigate, location: currentLocation }
+    return {
+      navigate: navigate.bind(this.props.history),
+      location: currentLocation
+    }
   }
 
   componentDidMount() {
