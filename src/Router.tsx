@@ -6,7 +6,7 @@ interface BaseContextContent { baseuri: string; basepath: string }
 
 const BaseContext: React.Context<BaseContextContent> = React.createContext({ baseuri: "/", basepath: "/" })
 
-interface RouterProps { }
+interface RouterProps {}
 
 const Router = (props: RouterProps) => (
   <BaseContext.Consumer>
