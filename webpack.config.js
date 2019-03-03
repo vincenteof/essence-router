@@ -19,9 +19,8 @@ module.exports = {
     ]
   },
   // react things as peer dependencies
-  externals: {
-    "react": "React",
-    "react-dom": "ReactDOM"
-  },
+  // externals: {
+  //   "react": "React"
+  // },
   mode: process.env.NODE_ENV ? process.env.NODE_ENV : "development"
 };

@@ -12,14 +12,17 @@
   ],
   "author": "Vincent Chen",
   "license": "MIT",
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
   "dependencies": {
-    "@types/react": "^16.8.4",
-    "@types/react-dom": "^16.8.2",
-    "react": "^16.8.3",
-    "react-dom": "^16.8.3"
+    "invariant": "^2.2.4"
   },
   "devDependencies": {
+    "@types/react": "^16.8.6",
     "awesome-typescript-loader": "^5.2.1",
+    "react": "^16.8.3",
     "source-map-loader": "^0.2.4",
     "typescript": "^3.3.3333",
     "webpack": "^4.29.5",
