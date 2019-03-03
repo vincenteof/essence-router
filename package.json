@@ -2,7 +2,7 @@
   "name": "essence-router",
   "version": "0.0.1",
   "description": "the essence of a react router",
-  "module": "src/index.js",
+  "module": "dist/essence-router.js",
   "scripts": {
     "webpack": "webpack"
   },
