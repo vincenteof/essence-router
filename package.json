@@ -12,6 +12,7 @@
   ],
   "author": "Vincent Chen",
   "license": "MIT",
+  "types": "dist/index.d.ts",
   "peerDependencies": {
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0"
