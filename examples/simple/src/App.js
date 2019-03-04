@@ -10,7 +10,7 @@ class App extends Component {
     return (
       <div className="App">
         <Router>
-          <Hello path="hello"/>
+          <Hello default />
           <World path="world" />
         </Router>
       </div>

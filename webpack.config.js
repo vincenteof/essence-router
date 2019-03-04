@@ -18,9 +18,6 @@ module.exports = {
       { enforce: "pre", test: /\.js$/, loader: "source-map-loader" }
     ]
   },
-  // react things as peer dependencies
-  // externals: {
-  //   "react": "React"
-  // },
+  devtool: 'eval-source-map',
   mode: process.env.NODE_ENV ? process.env.NODE_ENV : "development"
 };

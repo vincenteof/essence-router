@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { Location, LocationContextContent } from './Location'
 import { pick, resolve, EssenceRoute } from './match'
+import { stripSlashes } from './utils'
 
 interface BaseContextContent { baseuri: string; basepath: string }
 
@@ -89,7 +90,11 @@ function createRoutes(basepath: string): ElementToRoute {
       return { value: element, default: true }
     }
 
-    const path = basepath + element.props.path
+    const elementPath = element.props.path
+    const path = elementPath === "/"
+      ? basepath 
+      : `${stripSlashes(basepath)}/${elementPath}`
+
     return {
       value: element,
       default: element.props.default,

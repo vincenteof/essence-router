@@ -53,7 +53,7 @@ function pick(routes: EssenceRoute[], uri: string): Match | null {
         break
       }
 
-      if (!uriSeg) {
+      if (uriSeg === undefined) {
         missed = true
         break
       }
@@ -149,7 +149,10 @@ function resolve(to: string, base: string) {
   // to: somepath
   if (!startsWith(toSegments[0], ".")) {
     const pathname = baseSegments.concat(toSegments).join("/")
-    return addQuery("/" + pathname, toQuery)
+    const prefix = startsWith(pathname, "/")
+      ? ""
+      : "/"
+    return addQuery(prefix + pathname, toQuery)
   }
 
   // to: somepath with `.` and `..`
