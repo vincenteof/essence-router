@@ -1,18 +1,15 @@
 import * as React from 'react'
 import { EssenceLocation, navigate, globalHistory, IHistory } from './history'
 
-// ------ type definition
+// location context contains location object and global navigate method
 interface LocationContextContent {
   location?: EssenceLocation
   navigate?: typeof navigate
 }
 
 const LocationContext: React.Context<LocationContextContent> = React.createContext(undefined)
-// ------
 
 
-
-// ------ LocationConsumer
 interface LocationProps { children: (ctx: LocationContextContent) => React.ReactElement }
 
 const Location = (props: LocationProps) => {
@@ -29,11 +26,8 @@ const Location = (props: LocationProps) => {
     </LocationComsumer>
   )
 }
-// ------
 
 
-
-// ------ LocationProvider
 interface LocationProviderProps {
   history: IHistory
 }
@@ -43,6 +37,10 @@ interface LocationProviderState {
   refs: { unlisten: () => void }
 }
 
+// core of `Location`
+// `Location` is used by `Router`, which provides location information
+// when this react component mounts, it starts to listen to history
+// each time history changes, it will delegate the change to router and make it rerender
 class LocationProvider extends React.Component<LocationProviderProps, LocationProviderState> {
   static defaultProps = {
     history: globalHistory
@@ -98,7 +96,6 @@ class LocationProvider extends React.Component<LocationProviderProps, LocationPr
     )
   }
 }
-// ------
 
 
 export {

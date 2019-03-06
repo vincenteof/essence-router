@@ -1,3 +1,4 @@
+// get customized location object from some `source`
 type EssenceLocation = { state: any; key: string; } & Location
 function getLocation(source: any): EssenceLocation {
   return {
@@ -7,15 +8,18 @@ function getLocation(source: any): EssenceLocation {
   }
 }
 
+// function type definitions related to listeners
 type EssenceListener = (msg?: { location: EssenceLocation; action: string; }) => void
 type EssenceUnlistener = () => void
 
+// abstract `History` interface
 interface IHistory {
   currentLocation: EssenceLocation
   listen(listener: EssenceListener): EssenceListener
   navigate(to: string, parm: { state: any; replace: boolean; }): void
 }
 
+// an implementation of `History`
 class EssenceHistory implements IHistory {
   source: any
   listeners: EssenceListener[]
@@ -67,6 +71,7 @@ function createHistory(source: any): IHistory {
   return new EssenceHistory(source)
 }
 
+// history instance
 const globalHistory = createHistory(window)
 const navigate = globalHistory.navigate.bind(globalHistory)
 

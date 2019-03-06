@@ -13,7 +13,7 @@ interface Match {
   uri: string
 }
 
-// ------ matching algorithm
+// matching algorithm for route
 function pick(routes: EssenceRoute[], uri: string): Match | null {
   let match
   let default_
@@ -80,10 +80,9 @@ function pick(routes: EssenceRoute[], uri: string): Match | null {
 
   return match || default_ || null
 }
-// ------
 
 
-// ------ algorithm to rank different routes based on path
+// algorithm to rank different routes based on path
 function rankRoutes(routes: EssenceRoute[]) {
   return routes
     .map(rank)
@@ -126,10 +125,9 @@ const testWithScores: Array<[(seg: string) => boolean, number]> = [
   [isDynamic, DYNAMIC_POINTS],
   [isRootSegment, ROOT_POINTS]
 ]
-// ------
 
 
-// ------ get the formatted absolute path
+// get the formatted absolute path
 function resolve(to: string, base: string) {
   if (startsWith(to, "/")) {
     return to
@@ -170,7 +168,6 @@ function resolve(to: string, base: string) {
 }
 
 const addQuery = (pathname: string, query: string) => pathname + (query ? `${query}` : "")
-// ------
 
 
 export {

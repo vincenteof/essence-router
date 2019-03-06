@@ -12,6 +12,7 @@ interface LinkProps {
   children?: React.ReactNode
 }
 
+// it's a wrapper of `<a>`, whose `onClick` is to make all Routers to rerender
 const Link = React.forwardRef(({ innerRef, ...props }: LinkProps, ref) => {
   return (
     <BaseContext.Consumer>
